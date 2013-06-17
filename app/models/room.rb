@@ -26,4 +26,9 @@ class Room
   field :zipcode
 
   field :group, :type => Integer, :default => lambda { rand(24) }
+
+  def update
+    #property = Airbnb::Property({:id => self.aid})
+    #self.snapshots.create({ })
+  end
 end

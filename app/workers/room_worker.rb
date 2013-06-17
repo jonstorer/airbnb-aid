@@ -3,10 +3,12 @@ class RoomWorker
 
   def perform(page)
     Airbnb::Property.fetch(:page => page).each do |property|
+      $sidekiq_logger.info("result start")
+      $sidekiq_logger.info property
+      $sidekiq_logger.info("result end")
+
       if property.error
-        puts '-'*100
-        puts property.error
-        puts '-'*100
+        $sidekiq_logger.info(property.error)
       else
           attributes = {
             :aid                 => property.id,
@@ -31,8 +33,10 @@ class RoomWorker
           }
         if room = Room.where(:aid => property.id).first
           attributes.delete(:aid)
+          $sidekiq_logger.info("updated #{property.id}")
           room.update_attributes(attributes)
         else
+          $sidekiq_logger.info("created #{property.id}")
           Room.create(attributes)
         end
       end
