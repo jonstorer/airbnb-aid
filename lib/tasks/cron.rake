@@ -1,7 +1,10 @@
 namespace :aa do
   namespace :cron do
     desc 'Run these nightly'
-    task :nightly => []
+    task :nightly => [:load_listings]
+
+    desc 'Run these every 30 minutes'
+    task :every_30_minutes => [:update_rooms]
 
     desc 'Run these every hour'
     task :hourly => []
@@ -11,6 +14,12 @@ namespace :aa do
 
     desc 'Run these every month'
     task :monthly => []
+
+    desc 'update rooms'
+    task :update_rooms => :eager_load_environment do
+      group = ( Time.now.hour * 2 ) + ( Time.now.min > 29 ? 1 : 0 )
+      Room.where({ :group => group }).each(&:async_update)
+    end
 
     desc 'load new listings'
     task :load_listings => :eager_load_environment do
