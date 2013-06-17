@@ -27,8 +27,8 @@ class Room
 
   field :group, :type => Integer, :default => lambda { rand(24) }
 
-  def update
-    #property = Airbnb::Property({:id => self.aid})
-    #self.snapshots.create({ })
-  end
+  #def update
+  #  #property = Airbnb::Property({:id => self.aid})
+  #  #self.snapshots.create({ })
+  #end
 end

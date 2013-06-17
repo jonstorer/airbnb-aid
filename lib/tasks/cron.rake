@@ -25,7 +25,7 @@ namespace :aa do
     task :load_listings => :eager_load_environment do
       count = Airbnb::Property.count
       unless count.zero?
-        pages = ( count.to_f / 20.to_f ).to_i
+        pages = ( count.to_f / 10.to_f ).to_i
         (1..pages).each do |page|
           RoomWorker.perform_async(page)
         end
