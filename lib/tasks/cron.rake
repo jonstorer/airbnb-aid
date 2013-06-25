@@ -26,17 +26,11 @@ namespace :aa do
     task :load_listings => :eager_load_environment do
       LOCATIONS.each do |location|
         count = Airbnb::Property.count(:location => location)
-        if count > 1000
-          over = count - 1000
-          count = count - over
-
+        unless count.zero?
           pages = ( count.to_f / 10.to_f ).to_i
           (1..pages).each do |page|
             RoomWorker.perform_async({ :page => page, :location => location })
           end
-
-          RoomWorker.perform_async({ :page => page, :location => location })
-          over
         end
       end
     end
