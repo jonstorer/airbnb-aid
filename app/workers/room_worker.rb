@@ -51,6 +51,9 @@ class RoomWorker
     rescue Exception => e
       $sidekiq_logger.info("___ err  ___")
       $sidekiq_logger.info e.inspect
+      e.backtrace.each do |line|
+        $sidekiq_logger.info line
+      end
       $sidekiq_logger.info("___________")
     end
   end

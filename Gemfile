@@ -6,6 +6,11 @@ gem 'jquery-rails'
 gem 'capistrano'
 gem 'sidekiq'
 gem 'airbnb', :path => '~/code/airbnb'
+
+# what the fuck
+gem 'hashie'
+gem 'tor-privoxy'
+
 # gem 'unicorn'
 
 gem 'slim', '>= 1.1.0'
