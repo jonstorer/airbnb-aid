@@ -17,17 +17,20 @@ namespace :aa do
 
     desc 'update rooms'
     task :update_rooms => :eager_load_environment do
-      group = ( Time.now.hour * 2 ) + ( Time.now.min > 29 ? 1 : 0 )
-      Room.where({ :group => group }).each(&:async_update)
+      group = Time.now.hour
+      puts "queuing group #{group}"
+      Room.where({ :group => group }).each(&:snapshot)
     end
 
     desc 'load new listings'
     task :load_listings => :eager_load_environment do
-      count = Airbnb::Property.count
-      unless count.zero?
-        pages = ( count.to_f / 10.to_f ).to_i
-        (1..pages).each do |page|
-          RoomWorker.perform_async(page)
+      LOCATIONS.each do |location|
+        count = Airbnb::Property.count(:location => location)
+        unless count.zero?
+          pages = ( count.to_f / 10.to_f ).to_i
+          (1..pages).each do |page|
+            RoomWorker.perform_async({ :page => page, :location => location })
+          end
         end
       end
     end

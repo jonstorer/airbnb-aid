@@ -3,6 +3,8 @@ class Room
   include Mongoid::Timestamps
   include Mixins::Backgroundable
 
+  has_many :snapshots
+
   field :aid, :type => Integer
   field :name
 
@@ -27,8 +29,7 @@ class Room
 
   field :group, :type => Integer, :default => lambda { rand(24) }
 
-  #def update
-  #  #property = Airbnb::Property({:id => self.aid})
-  #  #self.snapshots.create({ })
-  #end
+  def snapshot
+    SnapshotWorker.perform_async(id.to_s)
+  end
 end

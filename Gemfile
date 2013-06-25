@@ -6,8 +6,6 @@ gem 'jquery-rails'
 gem 'capistrano'
 gem 'sidekiq'
 gem 'airbnb', :path => '~/code/airbnb'
-gem 'hashie'
-gem 'httparty'
 # gem 'unicorn'
 
 gem 'slim', '>= 1.1.0'
@@ -25,3 +23,5 @@ end
 group :development do
   gem 'debugger'
 end
+
+
