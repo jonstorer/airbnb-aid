@@ -1,7 +1,6 @@
 class Room
   include Mongoid::Document
   include Mongoid::Timestamps
-  include Mixins::Backgroundable
 
   has_many :snapshots
 

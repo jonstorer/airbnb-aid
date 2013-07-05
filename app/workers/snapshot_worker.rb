@@ -20,7 +20,6 @@ class SnapshotWorker
           :security_deposit              => property.security_deposit
         }
         room.snapshots.create!(attributes)
-        end
       end
     rescue Exception => e
       $sidekiq_logger.info("___ err  ___")

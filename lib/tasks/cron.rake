@@ -25,11 +25,14 @@ namespace :aa do
     desc 'load new listings'
     task :load_listings => :eager_load_environment do
       LOCATIONS.each do |location|
-        count = Airbnb::Property.count(:location => location)
-        unless count.zero?
-          pages = ( count.to_f / 10.to_f ).to_i
-          (1..pages).each do |page|
-            RoomWorker.perform_async({ :page => page, :location => location })
+        (1..16).each do |number_of_guests|
+          query = { :location => location, :number_of_guests => number_of_guests }
+          count = [ Airbnb::Property.count(query), 1000 ].min
+          unless count.zero?
+            pages = ( count.to_f / 10.to_f ).to_i
+            (1..pages).each do |page|
+              RoomWorker.perform_async(query.merge({ :page => page }))
+            end
           end
         end
       end
