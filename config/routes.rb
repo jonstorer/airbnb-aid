@@ -3,7 +3,15 @@ AirbnbAid::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  root 'welcome#index'
+
+  get 'join',    :controller => 'users',    :action => 'new', :as => :join
+  get 'sign_in', :controller => 'sessions', :action => 'new', :as => :sign_in
+
+  resource :dashboard, :only => :show
+
+  resources :users,    :only => :create
+  resources :sessions, :only => :create
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

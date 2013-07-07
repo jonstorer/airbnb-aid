@@ -1,0 +1,7 @@
+<%= simple_form_for(@user) do |f| %>
+  <%= f.input :email %>
+  <%= f.input :aid, :label => 'Airbnb Id' %>
+  <%= f.input :password %>
+  <%= f.input :password_confirmation %>
+  <%= f.submit 'Join' -%>
+<% end %>
