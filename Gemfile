@@ -45,9 +45,12 @@ end
 gem 'debugger', group: [:development, :test]
 
 group :test, :development do
+  gem 'factory_girl_rails', '~> 4.2'
+end
+
+group :test do
   gem 'cucumber-rails', :require => false
   gem 'database_cleaner'
-  gem 'factory_girl_rails', '~> 4.2'
   gem 'mongoid-rspec'
   gem 'rspec-rails', '~> 2.0'
   gem 'webmock', '~> 1.13.0'
