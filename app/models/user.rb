@@ -7,7 +7,7 @@ class User
   field :airbnb_user_id, :type => Integer
   field :first_name
 
-  validates :password, confirmation: true
+  validates :password, :confirmation => true
 
   before_create :update_from_airbnb
 
@@ -18,9 +18,12 @@ class User
   private
 
   def update_from_airbnb
-    airbnb_user = Airbnb::User.find(airbnb_user_id)
     write_attributes({
       :first_name => airbnb_user.first_name
     })
+  end
+
+  def airbnb_user
+    @airbnb_user ||= Airbnb::User.find(airbnb_user_id)
   end
 end
