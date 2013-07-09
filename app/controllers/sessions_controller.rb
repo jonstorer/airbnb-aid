@@ -8,4 +8,9 @@ class SessionsController < ApplicationController
     sign_in user
     redirect_to dashboard_path
   end
+
+  def destroy
+    sign_out
+    redirect_to root_url
+  end
 end

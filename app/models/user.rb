@@ -7,7 +7,10 @@ class User
   field :airbnb_user_id, :type => Integer
   field :first_name
 
-  validates :password, :confirmation => true
+  validates :password,       :confirmation => true
+  validates :password,       :presence     => { :message => 'is required' }
+  validates :airbnb_user_id, :presence     => { :message => 'is required' }
+  validates :email,          :presence     => { :message => 'is required' }
 
   before_create :update_from_airbnb
 

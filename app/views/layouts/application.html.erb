@@ -32,7 +32,7 @@
 
     <!-- For all other devices -->
     <!-- Size should be 32 x 32 pixels -->
-    <%= favicon_link_tag 'favicon.ico', :rel => 'shortcut icon' %>
+    <%#= favicon_link_tag 'favicon.ico', :rel => 'shortcut icon' %>
   </head>
   <body>
 
@@ -48,7 +48,8 @@
           <div class="container nav-collapse">
             <ul class="nav">
               <% if current_user -%>
-                Hey, <%= current_user.first_name %>!
+                <li><a href='#'>Hey, <%= current_user.first_name %>!</a></li>
+                <li><%= link_to 'Sign Out', sign_out_url %></li>
               <% else -%>
                 <li><%= link_to 'Join', join_url %></li>
                 <li><%= link_to 'Sign In', sign_in_url %></li>

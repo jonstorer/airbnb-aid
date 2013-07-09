@@ -8,6 +8,11 @@ class ApplicationController < ActionController::Base
     @current_user = user
   end
 
+  def sign_out
+    session[:user_id] = nil
+    @current_user = nil
+  end
+
   def current_user
     @current_user ||= session[:user_id].present? ? User.find(session[:user_id]) : nil
   end
