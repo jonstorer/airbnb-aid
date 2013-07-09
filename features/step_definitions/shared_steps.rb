@@ -17,6 +17,7 @@ When /^I follow "([^"]+)"$/ do |text|
   click_link text
 end
 
-Then /^I should see "([^"]+)"$/ do |text|
-  page.should have_content text
+Then /^I should (not )?see "([^"]+)"$/ do |negator, text|
+  method = negator.blank? ? :should : :should_not
+  page.send method, have_content(text)
 end
