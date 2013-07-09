@@ -1,10 +1,10 @@
 When /^I join as "([^"]+)"$/ do |credentials|
   email, airbnb_user_id, password = credentials.split('/')
   click_link 'Join'
-  fill_in('Email',                 :with => email)          unless email.blank?
-  fill_in('Airbnb User Id',        :with => airbnb_user_id) unless airbnb_user_id.blank?
-  fill_in('Password',              :with => password)       unless password.blank?
-  fill_in('Password confirmation', :with => password)       unless password.blank?
+  fill_in('Email',                      :with => email)          unless email.blank?
+  fill_in('Airbnb User Id',             :with => airbnb_user_id) unless airbnb_user_id.blank?
+  fill_in('user_password',              :with => password)       unless password.blank?
+  fill_in('user_password_confirmation', :with => password)       unless password.blank?
   click_button 'Join'
 end
 

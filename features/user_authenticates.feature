@@ -17,6 +17,6 @@ Feature: User authenticates
 
   Scenario: User registration fails
     When I join as "//"
-    Then I should see "is required" within .user_airbnb_user_id
-    Then I should see "is required" within .user_email
-    Then I should see "is required" within .user_password
+    Then I should see "is required" within the user's airbnb user id section
+    Then I should see "is required" within the user's email section
+    Then I should see "is required" within the user's password section

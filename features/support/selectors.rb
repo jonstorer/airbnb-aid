@@ -3,6 +3,8 @@ module Selectors
 
   def selector_for(named_element)
     case named_element
+    when /^the user's (.+) section$/
+      ".user_#{$1.downcase.parameterize.underscore}"
     # paths
     when /the homepage/
       root_path
