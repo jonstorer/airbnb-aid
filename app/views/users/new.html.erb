@@ -1,7 +1,35 @@
-<%= simple_form_for(@user) do |f| %>
-  <%= f.input :email %>
-  <%= f.input :airbnb_user_id, :label => 'Airbnb User Id' %>
-  <%= f.input :password %>
-  <%= f.input :password_confirmation %>
-  <%= f.submit 'Join' -%>
+<%= simple_form_for(@user, :html => { :class => 'form-horizontal'}) do |f| %>
+
+  <%= content_tag(:div, :class => 'form-inputs') do -%>
+    <%= f.input :airbnb_user_id, :wrapper => :prepend, :label => 'Airbnb User Id' do %>
+      <%= content_tag(:span, 'A', :class => 'add-on') %>
+      <%= f.input_field :airbnb_user_id %>
+    <% end -%>
+  <% end -%>
+
+  <%= content_tag(:div, :class => 'form-inputs') do -%>
+    <%= f.input :email, :wrapper => :prepend do %>
+      <%= content_tag(:span, '@', :class => 'add-on') %>
+      <%= f.input_field :email %>
+    <% end -%>
+  <% end -%>
+
+  <%= content_tag(:div, :class => 'form-inputs') do -%>
+    <%= f.input :password, :wrapper => :prepend do %>
+      <%= content_tag(:span, icon(:lock), :class => 'add-on') %>
+      <%= f.input_field :password %>
+    <% end -%>
+  <% end -%>
+
+  <%= content_tag(:div, :class => 'form-inputs') do -%>
+    <%= f.input :password_confirmation, :wrapper => :prepend do %>
+      <%= content_tag(:span, icon(:lock), :class => 'add-on') %>
+      <%= f.input_field :password_confirmation %>
+    <% end -%>
+  <% end -%>
+
+  <div class='form-actions'>
+    <%= f.submit 'Join', :class => 'btn' -%>
+  </div>
+
 <% end %>

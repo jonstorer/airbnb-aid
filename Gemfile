@@ -8,12 +8,7 @@ gem 'jquery-rails'
 gem 'sass-rails', '~> 4.0.0'
 gem 'mongoid', :github => 'mongoid'
 gem 'simple_form', :github => 'plataformatec/simple_form'
-
-# state airbnb
-gem 'airbnb', :path => '~/code/airbnb'
-gem 'hashie'
-gem 'tor-privoxy'
-# end airbnb
+gem 'airbnb', :git => 'git@github.com:jonstorer/airbnb.git'
 
 gem 'therubyracer'
 gem 'less-rails'

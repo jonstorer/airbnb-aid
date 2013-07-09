@@ -47,9 +47,6 @@
           <a class="brand" href="/">AirbnbAid</a>
           <div class="container nav-collapse">
             <ul class="nav">
-              <li><%= link_to "Link1", "/path1"  %></li>
-              <li><%= link_to "Link2", "/path2"  %></li>
-              <li><%= link_to "Link3", "/path3"  %></li>
               <% unless current_user -%>
                 <li><%= link_to 'Join', join_url %></li>
                 <li><%= link_to 'Sign In', sign_in_url %></li>

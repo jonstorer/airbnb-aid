@@ -16,10 +16,14 @@ GIT
       actionpack (>= 4.0.0, < 4.1)
       activemodel (>= 4.0.0, < 4.1)
 
-PATH
-  remote: ~/code/airbnb
+GIT
+  remote: git@github.com:jonstorer/airbnb.git
+  revision: f0a96d1bb0c6ee72c38cf38f282ae26915369c8e
   specs:
-    airbnb (0.0.1)
+    airbnb (0.0.2)
+      hashie (>= 2.0.5)
+      json (>= 1.8.0)
+      tor-privoxy (>= 0.1.1)
 
 GEM
   remote: https://rubygems.org/
@@ -240,7 +244,6 @@ DEPENDENCIES
   database_cleaner
   debugger
   factory_girl_rails (~> 4.2)
-  hashie
   jbuilder (~> 1.2)
   jquery-rails
   less-rails
@@ -252,7 +255,6 @@ DEPENDENCIES
   sdoc
   simple_form!
   therubyracer
-  tor-privoxy
   turbolinks
   twitter-bootstrap-rails
   uglifier (>= 1.3.0)
