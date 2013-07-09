@@ -18,7 +18,7 @@ GIT
 
 GIT
   remote: git@github.com:jonstorer/airbnb.git
-  revision: f0a96d1bb0c6ee72c38cf38f282ae26915369c8e
+  revision: a772ab51c29f7577667eba186fa34875681309b2
   specs:
     airbnb (0.0.2)
       hashie (>= 2.0.5)
@@ -133,7 +133,7 @@ GEM
       ntlm-http (~> 0.1, >= 0.1.1)
       webrobots (>= 0.0.9, < 0.2)
     mime-types (1.23)
-    mini_portile (0.5.0)
+    mini_portile (0.5.1)
     minitest (4.7.5)
     mongoid-rspec (1.8.2)
       mongoid (>= 3.0.1)
