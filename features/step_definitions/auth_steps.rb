@@ -8,11 +8,13 @@ When /^I join as "([^"]+)"$/ do |credentials|
   click_button 'Join'
 end
 
-When /^I (?:sign in|have signed in) as "([^"]+)"$/ do |email|
+When /^I (?:sign in|have signed in) as "([^"]+)"$/ do |credentials|
+  email, password = credentials.split('/')
   user = FactoryGirl.create(:user, :email => email)
+  password ||= user.password
   click_link 'Sign In'
   fill_in('Email',    :with => user.email)
-  fill_in('Password', :with => user.password)
+  fill_in('Password', :with => password)
   click_button 'Sign in'
 end
 

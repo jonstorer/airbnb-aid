@@ -12,6 +12,8 @@ Feature: User authenticates
   Scenario: User registers, signs in, signs out
     When I join as "jane@example.com/1234/sekret"
     Then I should see "Thank you for registering! We're updating your account from Airbnb."
+    When I sign in as "jane@example.com/wrong"
+    Then I should see "Email and Password do not match"
     When I sign in as "jane@example.com"
     Then I should see "Hey, Jane!"
     When I follow "Sign Out"
