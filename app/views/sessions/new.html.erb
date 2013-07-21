@@ -1,0 +1,20 @@
+<%= simple_form_for(@user, :url => sessions_path, :html => { :class => 'form-horizontal'}) do |f| %>
+
+  <%= content_tag(:div, :class => 'form-inputs') do -%>
+    <%= f.input :email, :wrapper => :prepend do %>
+      <%= content_tag(:span, '@', :class => 'add-on') %>
+      <%= f.input_field :email %>
+    <% end -%>
+  <% end -%>
+
+  <%= content_tag(:div, :class => 'form-inputs') do -%>
+    <%= f.input :password, :wrapper => :prepend do %>
+      <%= content_tag(:span, icon(:lock), :class => 'add-on') %>
+      <%= f.input_field :password %>
+    <% end -%>
+  <% end -%>
+
+  <div class='form-actions'>
+    <%= f.submit 'Sign in', :class => 'btn' -%>
+  </div>
+<% end %>
