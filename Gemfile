@@ -6,7 +6,16 @@ gem 'rails', '4.0.0'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'sass-rails', '~> 4.0.0'
-gem 'mongoid'
+gem 'mongoid', :github => 'mongoid'
+gem 'simple_form', :github => 'plataformatec/simple_form'
+
+gem 'airbnb', :git => 'git@github.com:jonstorer/airbnb.git'
+#gem 'airbnb', :path => '~/code/airbnb'
+
+gem 'therubyracer'
+gem 'less-rails'
+gem 'twitter-bootstrap-rails'
+
 gem 'uglifier', '>= 1.3.0'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
@@ -32,6 +41,15 @@ end
 #Use debugger
 gem 'debugger', group: [:development, :test]
 
+group :test, :development do
+  gem 'factory_girl_rails', '~> 4.2'
+end
+
 group :test do
-  gem 'cucumber-rails'
+  gem 'cucumber-rails', :require => false
+  gem 'database_cleaner'
+  gem 'launchy'
+  gem 'mongoid-rspec'
+  gem 'rspec-rails', '~> 2.0'
+  gem 'webmock', '~> 1.13.0'
 end
