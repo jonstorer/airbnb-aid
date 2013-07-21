@@ -48,6 +48,7 @@ end
 group :test do
   gem 'cucumber-rails', :require => false
   gem 'database_cleaner'
+  gem 'launchy'
   gem 'mongoid-rspec'
   gem 'rspec-rails', '~> 2.0'
   gem 'webmock', '~> 1.13.0'
