@@ -36,11 +36,9 @@ describe User, 'set_encrypted_password' do
 
   context 'when password and confirmation are not present' do
     subject { build(:user, :password => '', :password_confirmation => '') }
+    before  { subject.valid? }
 
-    its(:encrypted_password) do
-      subject.valid?
-      should be_nil
-    end
+    its(:encrypted_password) { should be_nil }
   end
 end
 
