@@ -8,7 +8,6 @@ class User
   field :airbnb_user_id, :type => Integer
   field :first_name
 
-
   validates :password,           :confirmation => true
   validates :password,           :presence     => { :message => 'is required' }
   validates :encrypted_password, :presence     => { :message => 'is required' }
