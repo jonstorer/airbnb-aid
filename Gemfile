@@ -51,5 +51,6 @@ group :test do
   gem 'launchy'
   gem 'mongoid-rspec'
   gem 'rspec-rails', '~> 2.0'
+  gem 'timecop', '~> 0.6'
   gem 'webmock', '~> 1.13.0'
 end
