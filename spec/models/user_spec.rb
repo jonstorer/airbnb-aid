@@ -7,7 +7,6 @@ describe User do
   it { should have_field(:airbnb_user_id).of_type(Integer) }
   it { should validate_presence_of(:airbnb_user_id) }
 
-  it { should have_field(:password) }
   it { should validate_confirmation_of(:password) }
   it { should validate_presence_of(:password) }
 

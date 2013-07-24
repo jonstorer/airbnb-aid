@@ -3,11 +3,11 @@ class User
   include Mongoid::Timestamps
 
   field :email
-  field :password
+  attr_accessor :password
+  field :encrypted_password
   field :airbnb_user_id, :type => Integer
   field :first_name
 
-  field :encrypted_password
 
   validates :password,           :confirmation => true
   validates :password,           :presence     => { :message => 'is required' }
