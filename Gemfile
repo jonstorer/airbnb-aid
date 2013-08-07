@@ -38,11 +38,10 @@ end
 # Use Capistrano for deployment
 # gem 'capistrano', group: :development
 
-#Use debugger
-gem 'debugger', group: [:development, :test]
-
 group :test, :development do
+  gem 'debugger'
   gem 'factory_girl_rails', '~> 4.2'
+  gem 'foreman', '0.63.0'
 end
 
 group :test do
