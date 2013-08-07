@@ -1,13 +1,6 @@
 <%= simple_form_for(@user, :html => { :class => 'form-horizontal'}) do |f| %>
 
   <%= content_tag(:div, :class => 'form-inputs') do -%>
-    <%= f.input :airbnb_user_id, :wrapper => :prepend, :label => 'Airbnb User Id' do %>
-      <%= content_tag(:span, 'A', :class => 'add-on') %>
-      <%= f.input_field :airbnb_user_id %>
-    <% end -%>
-  <% end -%>
-
-  <%= content_tag(:div, :class => 'form-inputs') do -%>
     <%= f.input :email, :wrapper => :prepend do %>
       <%= content_tag(:span, '@', :class => 'add-on') %>
       <%= f.input_field :email %>

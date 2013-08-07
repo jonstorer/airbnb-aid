@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      flash[:notice] = "Thank you for registering! We're updating your account from Airbnb."
+      flash[:notice] = "Thank you for registering!"
       redirect_to root_url
     else
       render :new
