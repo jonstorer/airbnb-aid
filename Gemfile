@@ -9,8 +9,10 @@ gem 'sass-rails', '~> 4.0.0'
 gem 'mongoid', :github => 'mongoid'
 gem 'simple_form', :github => 'plataformatec/simple_form'
 
-gem 'airbnb', :git => 'git@github.com:jonstorer/airbnb.git'
-#gem 'airbnb', :path => '~/code/airbnb'
+gem 'sidekiq'
+
+#gem 'airbnb', :git => 'git@github.com:jonstorer/airbnb.git'
+gem 'airbnb', :path => '~/code/airbnb'
 
 gem 'therubyracer'
 gem 'less-rails'
@@ -39,7 +41,9 @@ end
 # gem 'capistrano', group: :development
 
 group :test, :development do
-  gem 'debugger'
+  gem 'pry'
+  gem 'pry-rails'
+  gem 'pry-nav'
   gem 'factory_girl_rails', '~> 4.2'
   gem 'foreman', '0.63.0'
 end
