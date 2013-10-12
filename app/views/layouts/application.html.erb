@@ -49,6 +49,7 @@
             <ul class="nav">
               <% if current_user -%>
                 <li><a href='#'>Hey, <%= current_user.email %>!</a></li>
+                <li><%= link_to 'Listings', listings_url %></li>
                 <li><%= link_to 'Sign Out', sign_out_url %></li>
               <% else -%>
                 <li><%= link_to 'Join', join_url %></li>
@@ -65,23 +66,23 @@
     <br/>
 
     <div class="container">
-        <div class="row">
-          <div class="span9">
-            <%= bootstrap_flash %>
-            <%= yield %>
-          </div>
+      <div class="row">
+        <div class="span9">
+          <%= bootstrap_flash %>
+          <%= yield %>
+        </div>
+        <% if content_for(:side_nav) %>
           <div class="span3">
             <div class="well sidebar-nav">
-              <h3>Sidebar</h3>
-              <ul class="nav nav-list">
-                <li class="nav-header">Sidebar</li>
-                <li><%= link_to "Link1", "/path1"  %></li>
-                <li><%= link_to "Link2", "/path2"  %></li>
-                <li><%= link_to "Link3", "/path3"  %></li>
-              </ul>
+              <%= yield(:side_nav) %>
             </div><!--/.well -->
           </div><!--/span-->
-        </div><!--/row-->
+        <% else %>
+          <div class="span3">
+            &nbsp;
+          </div><!--/span-->
+        <% end %>
+      </div><!--/row-->
 
       <footer>
         <p>&copy; Company 2013</p>

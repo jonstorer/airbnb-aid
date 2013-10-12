@@ -1,0 +1,7 @@
+<%= render :partial => 'listing', :collection => @listings %>
+
+<% content_for(:side_nav) do %>
+  <ul class="nav nav-list">
+    <li><%= link_to 'Add Listing', new_listing_path %></li>
+  </ul>
+<% end %>

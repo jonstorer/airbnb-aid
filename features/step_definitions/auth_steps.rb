@@ -16,3 +16,12 @@ When /^I (?:sign in|have signed in) as "([^"]+)"$/ do |credentials|
   fill_in('Password', :with => password)
   click_button 'Sign in'
 end
+
+When /^I am logged in$/ do
+  visit '/'
+  user = FactoryGirl.create(:user)
+  click_link 'Sign In'
+  fill_in('Email',    :with => user.email)
+  fill_in('Password', :with => user.password)
+  click_button 'Sign in'
+end

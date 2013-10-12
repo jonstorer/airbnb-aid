@@ -21,3 +21,15 @@ Then /^I should (not )?see "([^"]+)"$/ do |negator, text|
   method = negator.blank? ? :should : :should_not
   page.send method, have_content(text)
 end
+
+Then /^I fillin "([^"]+)" with "([^"]+)"$/ do |selector, value|
+  fill_in(selector, :with => value)
+end
+
+Then /^I press "([^"]+)"$/ do |selector|
+  click_button selector
+end
+
+When /^jobs have run$/ do
+  Sidekiq::Worker.drain_all
+end
