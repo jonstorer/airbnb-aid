@@ -3,6 +3,7 @@ class User
   include Mongoid::Timestamps
 
   field :email
+  field :salt
   attr_accessor :password
   field :encrypted_password
 
@@ -10,6 +11,7 @@ class User
   validates :password,           :presence     => { :message => 'is required' }, :if => :new_record?
   validates :encrypted_password, :presence     => { :message => 'is required' }
   validates :email,              :presence     => { :message => 'is required' }
+  validates :salt,               :presence     => true
 
   before_validation :set_encryped_password, :on => :create, :unless => 'password.blank?'
 

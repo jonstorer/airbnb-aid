@@ -12,6 +12,9 @@ describe User do
   it { should have_field(:encrypted_password) }
   it { should validate_presence_of(:encrypted_password) }
 
+  it { should have_field(:salt) }
+  it { should validate_presence_of(:salt) }
+
   it { should have_and_belong_to_many(:listings).as_inverse_of(nil) }
 end
 
