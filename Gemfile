@@ -10,6 +10,7 @@ gem 'mongoid', :github => 'mongoid'
 gem 'simple_form', :github => 'plataformatec/simple_form'
 
 gem 'sidekiq'
+gem 'sinatra', :require => nil
 
 #gem 'airbnb', :git => 'git@github.com:jonstorer/airbnb.git'
 gem 'airbnb', :path => '~/code/airbnb'

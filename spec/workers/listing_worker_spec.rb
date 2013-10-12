@@ -11,7 +11,7 @@ end
 describe ListingWorker, '#perform, it updated the record from airbnb' do
   subject          { listing.reload }
   let(:listing)    { create(:listing) }
-  let(:attributes) do
+  let(:api_response) do
     {
       :listing               => {
         :name                => 'Fort Greene 1 br',
@@ -34,7 +34,7 @@ describe ListingWorker, '#perform, it updated the record from airbnb' do
   end
 
   before do
-    $airbnb_api["/api/-/v1/listings/#{listing.airbnb_id}"] = attributes
+    $airbnb_api["/api/-/v1/listings/#{listing.airbnb_id}"] = api_response
     ListingWorker.new.perform(listing.id)
   end
 

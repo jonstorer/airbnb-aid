@@ -1,4 +1,6 @@
 AirbnbAid::Application.routes.draw do
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/sidekiq'
   root 'welcome#index'
 
   get 'join',     :controller => 'users',    :action => 'new',     :as => :join
