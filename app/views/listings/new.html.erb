@@ -1,0 +1,11 @@
+<%= simple_form_for(@listing, :url => listings_path, :html => { :class => 'form-horizontal'}) do |f| %>
+  <%= content_tag(:div, :class => 'form-inputs') do -%>
+    <%= f.input :airbnb_id do %>
+      <%= f.input_field :airbnb_id %>
+    <% end -%>
+  <% end -%>
+
+  <div class='form-actions'>
+    <%= f.submit 'Add', :class => 'btn' -%>
+  </div>
+<% end %>

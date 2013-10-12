@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe User do
+  it { should be_timestamped_document }
+
   it { should have_field(:email) }
   it { should validate_presence_of(:email) }
 
@@ -9,6 +11,21 @@ describe User do
 
   it { should have_field(:encrypted_password) }
   it { should validate_presence_of(:encrypted_password) }
+
+  it { should have_field(:salt) }
+  it { should validate_presence_of(:salt) }
+
+  it { should have_and_belong_to_many(:listings).as_inverse_of(nil) }
+end
+
+describe User, '#password' do
+  context 'persisted record' do
+    subject { create(:user) }
+    it 'does not require the password to be set or confirm the password' do
+      subject.password = nil
+      subject.should be_valid
+    end
+  end
 end
 
 describe User, 'set_encrypted_password' do
