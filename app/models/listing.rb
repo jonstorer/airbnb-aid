@@ -29,7 +29,7 @@ class Listing
   field :cancellation_policy
 
   after_create :queue_update
-  after_update :queue_find_similar_listings, :if => :something_changed?
+  after_update :queue_find_similar_listings, :if => :watched_field_changed?
 
   def name
     attributes['name'] || "Listing #{airbnb_id}"
@@ -45,7 +45,7 @@ class Listing
     SimilarListingWorker.perform_async(self.to_param)
   end
 
-  def something_changed?
+  def watched_field_changed?
     WATCHED_FIELDS.map{|field| __send__ "#{field}_changed?" }.include? true
   end
 end
