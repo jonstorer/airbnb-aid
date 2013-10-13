@@ -1,0 +1,8 @@
+:default:
+  :wait: 10
+
+production:
+  :wait: 5
+
+test:
+  :wait: 0
