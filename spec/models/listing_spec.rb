@@ -45,3 +45,19 @@ describe Listing, 'after_create' do
     ListingWorker.should have_received(:perform_async).with(subject.to_param)
   end
 end
+
+describe Listing, 'after_update' do
+  subject { create(:listing) }
+
+  fields = [ :city, :state, :zipcode, :country_code, :neighborhood, :address,
+             :latitude, :longitude, :bedrooms, :beds, :person_capacity ]
+
+  fields.each do |field|
+    it "schedules a job to find similar listings when the #{field} field changes" do
+      subject.stub("#{field}_changed?" => true)
+      SimilarListingWorker.stub(:perform_async => true)
+      subject.save!
+      SimilarListingWorker.should have_received(:perform_async).with(subject.to_param)
+    end
+  end
+end
