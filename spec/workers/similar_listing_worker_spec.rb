@@ -33,11 +33,21 @@ describe SimilarListingWorker, '#perform, it fetches similar listings' do
     end
   end
 
-  [1, 2, 3, 4, 5].each do |page|
-    it 'searches' do
-      Airbnb::Listing.should have_received(:fetch).with({
-        :page => page
-      }).once
+
+  [2,3,4,5,6].each do |guests|
+    [1,2,3].each do |beds|
+      [1,2,3].each do |bedrooms|
+        [1, 2, 3, 4, 5].each do |page|
+          it 'searches' do
+            Airbnb::Listing.should have_received(:fetch).with({
+              :number_of_guests => guests,
+              :min_beds         => beds,
+              :min_bedrooms     => bedrooms,
+              :page             => page
+            }).once
+          end
+        end
+      end
     end
   end
 end
