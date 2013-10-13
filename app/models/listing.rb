@@ -22,6 +22,7 @@ class Listing
 
   field :bedrooms,        :type => Integer
   field :beds,            :type => Integer
+  field :bathrooms,       :type => Integer
   field :person_capacity, :type => Integer
 
   field :property_type

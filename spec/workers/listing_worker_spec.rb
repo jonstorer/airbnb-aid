@@ -25,6 +25,7 @@ describe ListingWorker, '#perform, it updated the record from airbnb' do
         :lng                 => 49.72,
         :bedrooms            => 1,
         :beds                => 2,
+        :bathrooms           => 1,
         :person_capacity     => 4,
         :property_type       => 'Apartment',
         :room_type           => 'Entire home/apt',
@@ -55,6 +56,7 @@ describe ListingWorker, '#perform, it updated the record from airbnb' do
   its(:longitude)           { should == 49.72 }
   its(:bedrooms)            { should == 1 }
   its(:beds)                { should == 2 }
+  its(:bathrooms)           { should == 1 }
   its(:person_capacity)     { should == 4 }
   its(:property_type)       { should == 'Apartment' }
   its(:room_type)           { should == 'Entire home/apt' }
