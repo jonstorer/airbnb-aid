@@ -23,7 +23,7 @@ class SimilarListingWorker
         (min_number_of_guests..max_number_of_guests).to_a.each do |number_of_guests|
           (min_number_of_bathrooms..max_number_of_bathrooms).to_a.each do |bathrooms|
             [1,2,3,4,5].each do |page|
-              Airbnb::Listing.fetch({
+              FetchListingsWorker.perform_async({
                 :location         => location,
                 :room_type        => room_type,
                 :number_of_guests => number_of_guests,

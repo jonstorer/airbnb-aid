@@ -24,11 +24,6 @@ describe SimilarListingWorker, '#perform, it fetches similar listings' do
     })
   end
 
-  before do
-    Airbnb::Listing.stub(:fetch => [])
-    subject.new.perform(listing.id)
-  end
-
   around do |example|
     Sidekiq::Testing.fake! do
       example.run
@@ -41,8 +36,10 @@ describe SimilarListingWorker, '#perform, it fetches similar listings' do
       [1,2,3].each do |bedrooms|
         [1,2].each do |bathrooms|
           [1, 2, 3, 4, 5].each do |page|
-            it "for #{guests} guests, #{beds} beds, #{bedrooms} bedrooms, #{bathrooms} bathrooms on page " do
-              Airbnb::Listing.should have_received(:fetch).with({
+            it "for #{guests} guests, #{beds} beds, #{bedrooms} bedrooms, #{bathrooms} bathrooms on page #{page}" do
+              SimilarListingWorker.stub(:async_perform => true)
+              subject.new.perform(listing.id)
+              SimilarListingWorker.should have_received(:async_perform).with({
                 :location         => location,
                 :room_type        => room_type,
                 :number_of_guests => guests,
