@@ -10,12 +10,14 @@ end
 
 describe SimilarListingWorker, '#perform, it fetches similar listings' do
   subject { SimilarListingWorker }
+  let(:location)  { "#{listing.neighborhood}, #{listing.smart_location}" }
+  let(:room_type) { [ listing.room_type ] }
   let(:listing) do
     create(:listing, {
+      :person_capacity => 4,
       :beds            => 2,
       :bedrooms        => 2,
       :bathrooms       => 1,
-      :person_capacity => 4,
       :room_type       => 'Entire home/apt',
       :smart_location  => 'Brooklyn, NY',
       :neighborhood    => 'Fort Greene'
@@ -37,14 +39,19 @@ describe SimilarListingWorker, '#perform, it fetches similar listings' do
   [2,3,4,5,6].each do |guests|
     [1,2,3].each do |beds|
       [1,2,3].each do |bedrooms|
-        [1, 2, 3, 4, 5].each do |page|
-          it 'searches' do
-            Airbnb::Listing.should have_received(:fetch).with({
-              :number_of_guests => guests,
-              :min_beds         => beds,
-              :min_bedrooms     => bedrooms,
-              :page             => page
-            }).once
+        [1,2].each do |bathrooms|
+          [1, 2, 3, 4, 5].each do |page|
+            it "for #{guests} guests, #{beds} beds, #{bedrooms} bedrooms, #{bathrooms} bathrooms on page " do
+              Airbnb::Listing.should have_received(:fetch).with({
+                :location         => location,
+                :room_type        => room_type,
+                :number_of_guests => guests,
+                :min_beds         => beds,
+                :min_bedrooms     => bedrooms,
+                :min_bathrooms    => bathrooms,
+                :page             => page
+              }).once
+            end
           end
         end
       end

@@ -21,13 +21,18 @@ class SimilarListingWorker
     (min_number_of_beds..max_number_of_beds).to_a.each do |beds|
       (min_number_of_bedrooms..max_number_of_bedrooms).to_a.each do |bedrooms|
         (min_number_of_guests..max_number_of_guests).to_a.each do |number_of_guests|
-          [1,2,3,4,5].each do |page|
-            Airbnb::Listing.fetch({
-              :number_of_guests => number_of_guests,
-              :min_beds         => beds,
-              :min_bedrooms     => bedrooms,
-              :page             => page
-            })
+          (min_number_of_bathrooms..max_number_of_bathrooms).to_a.each do |bathrooms|
+            [1,2,3,4,5].each do |page|
+              Airbnb::Listing.fetch({
+                :location         => location,
+                :room_type        => room_type,
+                :number_of_guests => number_of_guests,
+                :min_beds         => beds,
+                :min_bedrooms     => bedrooms,
+                :min_bathrooms    => bathrooms,
+                :page             => page
+              })
+            end
           end
         end
       end
