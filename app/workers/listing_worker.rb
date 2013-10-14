@@ -16,6 +16,7 @@ class ListingWorker
     listing.longitude           = airbnb_listing.lng
     listing.bedrooms            = airbnb_listing.bedrooms
     listing.beds                = airbnb_listing.beds
+    listing.bathrooms           = airbnb_listing.bathrooms
     listing.person_capacity     = airbnb_listing.person_capacity
     listing.property_type       = airbnb_listing.property_type
     listing.room_type           = airbnb_listing.room_type
