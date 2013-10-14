@@ -37,9 +37,9 @@ describe SimilarListingWorker, '#perform, it fetches similar listings' do
         [1,2].each do |bathrooms|
           [1, 2, 3, 4, 5].each do |page|
             it "for #{guests} guests, #{beds} beds, #{bedrooms} bedrooms, #{bathrooms} bathrooms on page #{page}" do
-              SimilarListingWorker.stub(:async_perform => true)
+              FetchListingsWorker.stub(:perform_async => true)
               subject.new.perform(listing.id)
-              SimilarListingWorker.should have_received(:async_perform).with({
+              FetchListingsWorker.should have_received(:perform_async).with({
                 :location         => location,
                 :room_type        => room_type,
                 :number_of_guests => guests,

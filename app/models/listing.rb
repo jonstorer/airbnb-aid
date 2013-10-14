@@ -6,8 +6,8 @@ class Listing
                      :neighborhood, :address, :latitude, :longitude,
                      :bedrooms, :beds, :person_capacity ]
 
-  field :airbnb_id
-  validates :airbnb_id, :presence => { :message => 'is required' }
+  field :airbnb_id, :type => Integer
+  validates :airbnb_id, :presence => { :message => 'is required' }, :uniqueness => true
 
   field :name
   field :city

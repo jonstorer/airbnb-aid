@@ -1,9 +1,8 @@
 FactoryGirl.define do
-
   sequence(:airbnb_id)
 
   factory :listing do
-    airbnb_id
+    airbnb_id { generate(:airbnb_id) }
     name '1 Br in Fort Greene'
     city 'Brooklyn'
     state 'NY'

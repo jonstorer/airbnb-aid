@@ -3,8 +3,9 @@ require 'spec_helper'
 describe Listing do
   it { should be_timestamped_document }
 
-  it { should have_field(:airbnb_id) }
+  it { should have_field(:airbnb_id).of_type(Integer) }
   it { should validate_presence_of(:airbnb_id) }
+  it { should validate_uniqueness_of(:airbnb_id) }
 
   it { should have_field(:name) }
   it { should have_field(:city) }
@@ -38,7 +39,7 @@ describe Listing, '#name' do
 end
 
 describe Listing, 'after_create' do
-  subject { build(:listing) }
+  subject { create(:listing) }
 
   it 'schedules a job to update the listing' do
     ListingWorker.stub(:perform_async => true)
