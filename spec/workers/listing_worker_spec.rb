@@ -4,7 +4,7 @@ describe ListingWorker do
   it { should be_kind_of(Sidekiq::Worker) }
 
   it 'has the default queue' do
-    ListingWorker.get_sidekiq_options['queue'].should == 'default'
+    ListingWorker.get_sidekiq_options['queue'].should == 'high'
   end
 end
 
