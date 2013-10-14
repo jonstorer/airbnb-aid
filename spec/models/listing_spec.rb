@@ -18,6 +18,7 @@ describe Listing do
   it { should have_field(:longitude).of_type(Float) }
   it { should have_field(:bedrooms).of_type(Integer) }
   it { should have_field(:beds).of_type(Integer) }
+  it { should have_field(:bathrooms).of_type(Integer) }
   it { should have_field(:person_capacity).of_type(Integer) }
   it { should have_field(:property_type) }
   it { should have_field(:room_type) }
