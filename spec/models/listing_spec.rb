@@ -7,6 +7,8 @@ describe Listing do
   it { should validate_presence_of(:airbnb_id) }
   it { should validate_uniqueness_of(:airbnb_id) }
 
+  it { should have_field(:active).of_type(Boolean).with_default_value_of(true) }
+
   it { should have_field(:name) }
   it { should have_field(:city) }
   it { should have_field(:state) }
@@ -41,6 +43,12 @@ end
 describe Listing, 'after_create' do
   subject { create(:listing) }
 
+  around do |example|
+    Sidekiq::Testing.fake! do
+      example.run
+    end
+  end
+
   it 'schedules a job to update the listing' do
     ListingWorker.stub(:perform_async => true)
     subject.save!
@@ -51,9 +59,13 @@ end
 describe Listing, 'after_update' do
   subject { create(:listing) }
 
-  fields = [ :city, :state, :zipcode, :country_code, :neighborhood, :address,
-             :latitude, :longitude, :bedrooms, :beds, :person_capacity ]
+  around do |example|
+    Sidekiq::Testing.fake! do
+      example.run
+    end
+  end
 
+  fields = Listing::WATCHED_FIELDS
   fields.each do |field|
     it "schedules a job to find similar listings when the #{field} field changes" do
       subject.stub("#{field}_changed?" => true)
@@ -61,5 +73,19 @@ describe Listing, 'after_update' do
       subject.save!
       SimilarListingWorker.should have_received(:perform_async).with(subject.to_param)
     end
+  end
+
+  it 'does not schedule jobs when the listing is not active' do
+    subject.stub(:active? => false)
+    SimilarListingWorker.stub(:perform_async => true)
+    subject.save!
+    SimilarListingWorker.should_not have_received(:perform_async).with(subject.to_param)
+  end
+
+  it 'does not schedule jobs when any of the required fields are not present' do
+    subject.stub(:city => nil)
+    SimilarListingWorker.stub(:perform_async => true)
+    subject.save!
+    SimilarListingWorker.should_not have_received(:perform_async).with(subject.to_param)
   end
 end

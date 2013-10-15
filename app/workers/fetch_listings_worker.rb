@@ -1,5 +1,10 @@
 class FetchListingsWorker
   include Sidekiq::Worker
+  sidekiq_options({
+    :throttle => { :threshold => 1, :period => 10.seconds },
+    :unique => true,
+    :unique_unlock_order => :before_yield
+  })
 
   def perform(params)
     Airbnb::Listing.fetch(params).each do |airbnb_listing|
@@ -12,6 +17,7 @@ class FetchListingsWorker
         :smart_location      => airbnb_listing.smart_location,
         :bedrooms            => airbnb_listing.bedrooms,
         :beds                => airbnb_listing.beds,
+        :bathrooms           => airbnb_listing.bathrooms,
         :neighborhood        => airbnb_listing.neighborhood,
         :person_capacity     => airbnb_listing.person_capacity,
         :state               => airbnb_listing.state,

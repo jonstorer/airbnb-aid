@@ -11,6 +11,12 @@ gem 'simple_form', :github => 'plataformatec/simple_form'
 
 gem 'sidekiq'
 gem 'sinatra', :require => nil
+gem 'kiqstand', :github => 'mongoid/kiqstand'
+gem 'sidekiq-throttler'
+gem 'sidekiq-unique-jobs'
+
+# use this when running on servers
+# https://github.com/ondrejbartas/sidekiq-cron
 
 #gem 'airbnb', :git => 'git@github.com:jonstorer/airbnb.git'
 gem 'airbnb', :path => '~/code/airbnb'

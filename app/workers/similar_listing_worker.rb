@@ -6,36 +6,16 @@ class SimilarListingWorker
     location = "#{listing.neighborhood}, #{listing.smart_location}"
     room_type = [ listing.room_type ]
 
-    min_number_of_guests = [listing.person_capacity - 2, 1].max
-    max_number_of_guests = listing.person_capacity + 2
-
-    min_number_of_beds = [listing.beds - 1, 1].max
-    max_number_of_beds = listing.beds + 1
-
-    min_number_of_bedrooms = [listing.bedrooms - 1, 0].max
-    max_number_of_bedrooms = listing.bedrooms + 1
-
-    min_number_of_bathrooms = [listing.bathrooms - 1, 1].max
-    max_number_of_bathrooms = listing.bathrooms + 1
-
-    (min_number_of_beds..max_number_of_beds).to_a.each do |beds|
-      (min_number_of_bedrooms..max_number_of_bedrooms).to_a.each do |bedrooms|
-        (min_number_of_guests..max_number_of_guests).to_a.each do |number_of_guests|
-          (min_number_of_bathrooms..max_number_of_bathrooms).to_a.each do |bathrooms|
-            [1,2,3,4,5].each do |page|
-              FetchListingsWorker.perform_async({
-                :location         => location,
-                :room_type        => room_type,
-                :number_of_guests => number_of_guests,
-                :min_beds         => beds,
-                :min_bedrooms     => bedrooms,
-                :min_bathrooms    => bathrooms,
-                :page             => page
-              })
-            end
-          end
-        end
-      end
+    [1,2,3,4,5].each do |page|
+      FetchListingsWorker.perform_async({
+        :location         => location,
+        :room_type        => room_type,
+        :number_of_guests => listing.person_capacity,
+        :min_beds         => listing.beds,
+        :min_bedrooms     => listing.bedrooms,
+        :min_bathrooms    => listing.bathrooms,
+        :page             => page
+      })
     end
   end
 end
