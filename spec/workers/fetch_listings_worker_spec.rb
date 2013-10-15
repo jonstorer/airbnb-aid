@@ -16,13 +16,13 @@ describe FetchListingsWorker, '#perform, it fetches similar listings' do
   end
 
   let(:result_one) do
-    { 'id' => 900691, 'city' => 'New York', 'lat' => 40.75747813141989, 'lng' => -73.99101412904595, 'country' => 'United States', 'name' => 'Times Square, Queen Bed, Big Futon!', 'smart_location' => 'New York, NY', 'bedrooms' => 1, 'beds' => 1, 'neighborhood' => "Hell's Kitchen", 'person_capacity' => 4, 'state' => 'NY', 'zipcode' => '10036', 'address' => 'West 43rd Street, New York, NY 10036, United States', 'country_code' => 'US', 'cancellation_policy' => 'strict', 'property_type' => 'Apartment', 'room_type' => 'Entire home/apt' }
+    Hashie::Mash.new({ 'id' => 900691, 'city' => 'New York', 'lat' => 40.75747813141989, 'lng' => -73.99101412904595, 'country' => 'United States', 'name' => 'Times Square, Queen Bed, Big Futon!', 'smart_location' => 'New York, NY', 'bedrooms' => 1, 'beds' => 1, 'neighborhood' => "Hell's Kitchen", 'person_capacity' => 4, 'state' => 'NY', 'zipcode' => '10036', 'address' => 'West 43rd Street, New York, NY 10036, United States', 'country_code' => 'US', 'cancellation_policy' => 'strict', 'property_type' => 'Apartment', 'room_type' => 'Entire home/apt' })
   end
 
   let(:listing_one) { create(:listing) }
 
   let(:result_two) do
-    { 'id' => 900692, 'city' => 'New York', 'lat' => 40.75747813141989, 'lng' => -73.99101412904595, 'country' => 'United States', 'name' => 'Times Square, Queen Bed, Big Futon!', 'smart_location' => 'New York, NY', 'bedrooms' => 1, 'beds' => 1, 'neighborhood' => "Hell's Kitchen", 'person_capacity' => 4, 'state' => 'NY', 'zipcode' => '10036', 'address' => 'West 43rd Street, New York, NY 10036, United States', 'country_code' => 'US', 'cancellation_policy' => 'strict', 'property_type' => 'Apartment', 'room_type' => 'Entire home/apt' }
+    Hashie::Mash.new({ 'id' => 900692, 'city' => 'New York', 'lat' => 40.75747813141989, 'lng' => -73.99101412904595, 'country' => 'United States', 'name' => 'Times Square, Queen Bed, Big Futon!', 'smart_location' => 'New York, NY', 'bedrooms' => 1, 'beds' => 1, 'neighborhood' => "Hell's Kitchen", 'person_capacity' => 4, 'state' => 'NY', 'zipcode' => '10036', 'address' => 'West 43rd Street, New York, NY 10036, United States', 'country_code' => 'US', 'cancellation_policy' => 'strict', 'property_type' => 'Apartment', 'room_type' => 'Entire home/apt' })
   end
 
   let(:listing_two) { create(:listing) }

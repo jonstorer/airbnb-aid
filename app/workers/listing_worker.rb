@@ -1,5 +1,6 @@
 class ListingWorker
   include Sidekiq::Worker
+  sidekiq_options :queue => 'high'
 
   def perform(id)
     listing = Listing.find(id)

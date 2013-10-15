@@ -7,4 +7,5 @@
 :concurrency:  1
 :timeout: 12
 :queues:
-  - [default, 5]
+  - [high, 2]
+  - [default, 1]
