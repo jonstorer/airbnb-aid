@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '>= 4.0.0'
-gem 'mongoid', :github => 'mongoid', :ref => 'b3231c8'
+gem 'mongoid', :github => 'mongoid'
 
 gem 'coffee-rails', '>= 4.0.0'
 gem 'jquery-rails'
@@ -14,13 +14,14 @@ gem 'sinatra', :require => nil
 gem 'sidekiq'
 gem 'sidekiq-throttler'
 gem 'sidekiq-unique-jobs'
-gem 'kiqstand', :github => 'mongoid/kiqstand'
+
+#TODO: bring back kiqstand when it updates
+#gem 'kiqstand', :github => 'mongoid/kiqstand'
 
 # use this when running on servers
 # https://github.com/ondrejbartas/sidekiq-cron
 
-#gem 'airbnb', :git => 'git@github.com:jonstorer/airbnb.git'
-gem 'airbnb', :path => '~/code/airbnb'
+gem 'airbnb', :git => 'git@github.com:jonstorer/airbnb.git'
 
 gem 'therubyracer'
 gem 'less-rails'
