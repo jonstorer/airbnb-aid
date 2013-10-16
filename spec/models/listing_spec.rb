@@ -65,8 +65,7 @@ describe Listing, 'after_update' do
     end
   end
 
-  fields = Listing::WATCHED_FIELDS
-  fields.each do |field|
+  Listing::WATCHED_FIELDS.each do |field|
     it "schedules a job to find similar listings when the #{field} field changes" do
       subject.stub("#{field}_changed?" => true)
       SimilarListingWorker.stub(:perform_async => true)
