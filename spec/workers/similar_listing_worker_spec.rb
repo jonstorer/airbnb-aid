@@ -31,27 +31,19 @@ describe SimilarListingWorker, '#perform, it fetches similar listings' do
   end
 
 
-  [2,3,4,5,6].each do |guests|
-    [1,2,3].each do |beds|
-      [1,2,3].each do |bedrooms|
-        [1,2].each do |bathrooms|
-          [1, 2, 3, 4, 5].each do |page|
-            it "for #{guests} guests, #{beds} beds, #{bedrooms} bedrooms, #{bathrooms} bathrooms on page #{page}" do
-              FetchListingsWorker.stub(:perform_async => true)
-              subject.new.perform(listing.id)
-              FetchListingsWorker.should have_received(:perform_async).with({
-                :location         => location,
-                :room_type        => room_type,
-                :number_of_guests => guests,
-                :min_beds         => beds,
-                :min_bedrooms     => bedrooms,
-                :min_bathrooms    => bathrooms,
-                :page             => page
-              }).once
-            end
-          end
-        end
-      end
+  [1, 2, 3, 4, 5].each do |page|
+    it "for page #{page}" do
+      FetchListingsWorker.stub(:perform_async => true)
+      subject.new.perform(listing.id)
+      FetchListingsWorker.should have_received(:perform_async).with({
+        :location         => location,
+        :room_type        => room_type,
+        :number_of_guests => listing.person_capacity,
+        :min_beds         => listing.beds,
+        :min_bedrooms     => listing.bedrooms,
+        :min_bathrooms    => listing.bathrooms,
+        :page             => page
+      }).once
     end
   end
 end

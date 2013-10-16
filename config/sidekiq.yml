@@ -4,8 +4,8 @@
 ---
 :verbose: true
 :pidfile: tmp/pids/sidekiq.pid
-:concurrency:  1
+:concurrency:  20
 :timeout: 12
 :queues:
-  - [high, 2]
+  - [high, 1]
   - [default, 1]
