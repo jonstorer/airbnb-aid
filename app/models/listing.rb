@@ -6,9 +6,12 @@ class Listing
                      :neighborhood, :address, :latitude, :longitude,
                      :bedrooms, :beds, :person_capacity ]
 
+  scope :active, where(:active => true)
+
   field :airbnb_id, :type => Integer
   validates :airbnb_id, :presence => { :message => 'is required' }, :uniqueness => true
 
+  field :active, :type => Boolean, :default => true
   field :name
   field :city
   field :state
@@ -30,7 +33,7 @@ class Listing
   field :cancellation_policy
 
   after_create :queue_update
-  after_update :queue_find_similar_listings, :if => :watched_field_changed?
+  after_update :queue_find_similar_listings, :if => :active_and_required_fields_present_and_watched_field_changed?
 
   def name
     attributes['name'] || "Listing #{airbnb_id}"
@@ -44,6 +47,14 @@ class Listing
 
   def queue_find_similar_listings
     SimilarListingWorker.perform_async(self.to_param)
+  end
+
+  def active_and_required_fields_present_and_watched_field_changed?
+    active? && required_fields_present? && watched_field_changed?
+  end
+
+  def required_fields_present?
+    WATCHED_FIELDS.all?{|field| __send__(field).present? }
   end
 
   def watched_field_changed?
