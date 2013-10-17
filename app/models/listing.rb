@@ -27,6 +27,7 @@ class Listing
   field :beds,            :type => Integer
   field :bathrooms,       :type => Integer
   field :person_capacity, :type => Integer
+  field :min_nights,      :type => Integer
 
   field :property_type
   field :room_type
