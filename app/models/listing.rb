@@ -23,7 +23,6 @@ class Listing
   field :latitude,  :type => Float
   field :longitude, :type => Float
 
-
   field :bedrooms,        :type => Integer
   field :beds,            :type => Integer
   field :bathrooms,       :type => Integer
