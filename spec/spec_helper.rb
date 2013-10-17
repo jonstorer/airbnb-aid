@@ -15,7 +15,6 @@ ActiveRecord::Migration.check_pending! if defined?(ActiveRecord::Migration)
 RSpec.configure do |config|
   config.include Mongoid::Matchers
   config.include FactoryGirl::Syntax::Methods
-  # config.mock_with :mocha
   config.infer_base_class_for_anonymous_controllers = false
 
   config.before(:suite) do
