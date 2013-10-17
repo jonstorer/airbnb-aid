@@ -26,6 +26,7 @@ describe Listing do
   it { should have_field(:property_type) }
   it { should have_field(:room_type) }
   it { should have_field(:cancellation_policy) }
+  it { should have_field(:min_nights).of_type(Integer) }
 end
 
 describe Listing, '#name' do
