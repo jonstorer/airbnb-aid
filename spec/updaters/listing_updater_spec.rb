@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ListingBuilder do
+describe ListingUpdater do
   let(:listing) { create(:listing) }
 
   let(:airbnb_listing) do
@@ -27,7 +27,7 @@ describe ListingBuilder do
 
   before do
     listing.stub(:update_attributes! => true)
-    ListingBuilder.new(listing, airbnb_listing).save!
+    ListingUpdater.new(listing, airbnb_listing).save!
   end
 
   it 'updates the listing with attributes from airbnb' do

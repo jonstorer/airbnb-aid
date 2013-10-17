@@ -9,7 +9,7 @@ class FetchListingsWorker
   def perform(params)
     Airbnb::Listing.fetch(params).each do |airbnb_listing|
       listing = Listing.find_or_create_by({ :airbnb_id => airbnb_listing.id })
-      ListingBuilder.new(listing, airbnb_listing).save!
+      ListingUpdater.new(listing, airbnb_listing).save!
     end
   end
 end

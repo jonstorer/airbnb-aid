@@ -16,9 +16,9 @@ describe ListingWorker, '#perform, it updated the record from airbnb' do
   it 'should update the listing with the airbnb record' do
     Sidekiq::Testing.fake! do
       Airbnb::Listing.stub(:find => airbnb_listing)
-      ListingBuilder.stub(:new => builder)
+      ListingUpdater.stub(:new => builder)
       ListingWorker.new.perform(listing.id)
-      ListingBuilder.should have_received(:new).with(listing, airbnb_listing)
+      ListingUpdater.should have_received(:new).with(listing, airbnb_listing)
       builder.should have_received(:save!)
     end
   end

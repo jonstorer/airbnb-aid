@@ -1,4 +1,4 @@
-class ListingBuilder
+class ListingUpdater
 
   def initialize(listing, airbnb_listing)
     @listing        = listing
