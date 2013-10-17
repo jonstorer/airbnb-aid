@@ -15,6 +15,7 @@ class ListingUpdater
       :bedrooms            => @airbnb_listing.bedrooms,
       :beds                => @airbnb_listing.beds,
       :bathrooms           => @airbnb_listing.bathrooms,
+      :min_nights          => @airbnb_listing.min_nights,
       :neighborhood        => @airbnb_listing.neighborhood,
       :person_capacity     => @airbnb_listing.person_capacity,
       :state               => @airbnb_listing.state,

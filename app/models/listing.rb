@@ -23,10 +23,12 @@ class Listing
   field :latitude,  :type => Float
   field :longitude, :type => Float
 
+
   field :bedrooms,        :type => Integer
   field :beds,            :type => Integer
   field :bathrooms,       :type => Integer
   field :person_capacity, :type => Integer
+  field :min_nights,      :type => Integer
 
   field :property_type
   field :room_type
