@@ -9,56 +9,17 @@ describe ListingWorker do
 end
 
 describe ListingWorker, '#perform, it updated the record from airbnb' do
-  subject          { listing.reload }
-  let(:listing)    { create(:listing) }
-  let(:api_response) do
-    {
-      :listing               => {
-        :name                => 'Fort Greene 1 br',
-        :city                => 'Brooklyn',
-        :zipcode             => '11205',
-        :country_code        => 'US',
-        :smart_location      => 'Brooklyn, NY',
-        :neighborhood        => 'Fort Greene',
-        :address             => 'Clermont Ave, Brooklyn, NY 11205',
-        :lat                 => 72.49,
-        :lng                 => 49.72,
-        :bedrooms            => 1,
-        :beds                => 2,
-        :bathrooms           => 1,
-        :person_capacity     => 4,
-        :property_type       => 'Apartment',
-        :room_type           => 'Entire home/apt',
-        :cancellation_policy => 'strict'
-      }
-    }
-  end
+  let(:listing)        { create(:listing) }
+  let(:builder)        { double(:save! => true) }
+  let(:airbnb_listing) { double('airbnb_listing') }
 
-  before do
-    $airbnb_api["/api/-/v1/listings/#{listing.airbnb_id}"] = api_response
-    ListingWorker.new.perform(listing.id)
-  end
-
-  around do |example|
+  it 'should update the listing with the airbnb record' do
     Sidekiq::Testing.fake! do
-      example.run
+      Airbnb::Listing.stub(:find => airbnb_listing)
+      ListingBuilder.stub(:new => builder)
+      ListingWorker.new.perform(listing.id)
+      ListingBuilder.should have_received(:new).with(listing, airbnb_listing)
+      builder.should have_received(:save!)
     end
   end
-
-  its(:name)                { should == 'Fort Greene 1 br' }
-  its(:city)                { should == 'Brooklyn' }
-  its(:zipcode)             { should == '11205' }
-  its(:country_code)        { should == 'US' }
-  its(:smart_location)      { should == 'Brooklyn, NY' }
-  its(:neighborhood)        { should == 'Fort Greene' }
-  its(:address)             { should == 'Clermont Ave, Brooklyn, NY 11205' }
-  its(:latitude)            { should == 72.49 }
-  its(:longitude)           { should == 49.72 }
-  its(:bedrooms)            { should == 1 }
-  its(:beds)                { should == 2 }
-  its(:bathrooms)           { should == 1 }
-  its(:person_capacity)     { should == 4 }
-  its(:property_type)       { should == 'Apartment' }
-  its(:room_type)           { should == 'Entire home/apt' }
-  its(:cancellation_policy) { should == 'strict' }
 end
