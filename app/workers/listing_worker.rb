@@ -1,6 +1,9 @@
 class ListingWorker
   include Sidekiq::Worker
-  sidekiq_options({ :queue => 'high', :throttle => { :threshold => 1, :period => 9.seconds } })
+  sidekiq_options({
+    :throttle => { :threshold => 1, :period => 8.seconds },
+    :queue => 'high'
+  })
 
   def perform(id)
     listing = Listing.find(id)

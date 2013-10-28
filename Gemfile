@@ -15,9 +15,6 @@ gem 'sidekiq'
 gem 'sidekiq-throttler'
 gem 'sidekiq-unique-jobs'
 
-#TODO: bring back kiqstand when it updates
-#gem 'kiqstand', :github => 'mongoid/kiqstand'
-
 # use this when running on servers
 # https://github.com/ondrejbartas/sidekiq-cron
 
