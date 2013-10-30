@@ -3,7 +3,7 @@ require 'spec_helper'
 describe ListingWorker do
   it { should be_kind_of(Sidekiq::Worker) }
 
-  it 'has the default queue' do
+  it 'has the correct queue' do
     ListingWorker.get_sidekiq_options['queue'].should == 'high'
   end
 end
