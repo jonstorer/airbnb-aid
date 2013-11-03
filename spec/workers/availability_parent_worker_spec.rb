@@ -19,10 +19,12 @@ end
 
 describe AvailabilityParentWorker, '#perform' do
   subject       { AvailabilityParentWorker.new }
-  let(:listing) { create(:listing, :min_nights => 2) }
+  let(:listing) { build(:listing, :min_nights => 2) }
 
   before do
     Listing.stub(:find).with(listing.to_param).and_return(listing)
+    AvailabilityParentWorker.stub(:perform_async)
+    subject.perform(listing.to_param)
   end
 
   around(:each) do |example|
@@ -31,10 +33,8 @@ describe AvailabilityParentWorker, '#perform' do
     end
   end
 
-  it 'schedules jobs to fetch availibility over the next 30 days' do
-    AvailabilityParentWorker.stub(:perform_async)
-    subject.perform(listing.to_param)
-    (0..30).each do |n|
+  (0..30).each do |n|
+    it "schedules jobs to fetch availibility for #{n} to #{n+2} days from now" do
       AvailabilityParentWorker.should have_received(:perform_async).with({
         :id       => listing.to_param,
         :checkin  => n.days.from_now.to_date,

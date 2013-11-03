@@ -33,3 +33,8 @@ end
 When /^jobs have run$/ do
   Sidekiq::Worker.drain_all
 end
+
+Then /^show me the page$/ do
+  save_and_open_page
+end
+

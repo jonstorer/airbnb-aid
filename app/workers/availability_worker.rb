@@ -4,10 +4,7 @@ class AvailabilityWorker
 
   def perform(params)
     listing = Listing.find params[:id]
-    airbnb_listing = Airbnb::Listing.new({
-      :id         => listing.airbnb_id,
-      :min_nights => listing.min_nights
-    })
-    airbnb_listing.available?(:checkin => params[:checkin], :checkout => params[:checkout])
+    airbnb_listing = Airbnb::Listing.find(listing.airbnb_id)
+    airbnb_listing.available?(Date.parse(params[:checkin]), Date.parse(params[:checkout]), listing.person_capacity)
   end
 end
