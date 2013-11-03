@@ -1,5 +1,10 @@
 require "cgi"
 module Helpers
+
+  def airbnb_listing(attrs={})
+    {}.merge(attrs)
+  end
+
   def current_user
     User.where(:remember_me_token => cookies['remember_me_token']).first
   end

@@ -69,12 +69,19 @@
       <div class="row">
         <div class="span9">
           <%= bootstrap_flash %>
+          <% if content_for(:breadcrumbs) %>
+            <ul class='breadcrumb'>
+              <%= yield(:breadcrumbs) %>
+            </ul>
+          <% end %>
           <%= yield %>
         </div>
         <% if content_for(:side_nav) %>
           <div class="span3">
             <div class="well sidebar-nav">
-              <%= yield(:side_nav) %>
+              <ul class="nav nav-list">
+                <%= yield(:side_nav) %>
+              </ul>
             </div><!--/.well -->
           </div><!--/span-->
         <% else %>
