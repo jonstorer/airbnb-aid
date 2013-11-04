@@ -31,6 +31,9 @@ Then /^I press "([^"]+)"$/ do |selector|
 end
 
 When /^jobs have run$/ do
+  Sidekiq::Worker.jobs.each do |job|
+    puts job.flatten.join(', ')
+  end
   Sidekiq::Worker.drain_all
 end
 
@@ -38,3 +41,6 @@ Then /^show me the page$/ do
   save_and_open_page
 end
 
+When /^I wait for (\d+) seconds?$/ do |seconds|
+  sleep seconds.to_i
+end

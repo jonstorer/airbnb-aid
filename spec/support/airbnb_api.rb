@@ -1,21 +1,15 @@
 class AirbnbApi
-  FOUR_OH_FOUR = {
-    :error_code    => 404,
-    :error         => 'record_not_found',
-    :error_message => 'Unfortunately, this is no longer available.'
-  }
+  class MissingStubbedResponse < Exception; end
 
   attr_accessor :requests, :responses, :env
-  cattr_accessor :logger
-
-  self.logger = Logger.new(STDOUT)
 
   def call(env)
     self.env = env
     self.requests << request
-    response = self.responses[uri] || FOUR_OH_FOUR
+    response = self.responses[uri]
     log "Request:  #{uri}"
-    log "Response: #{response}"
+    log "Response: #{response || 'Missing stubbed response'}"
+    raise(MissingStubbedResponse) unless response
     response
   end
 
@@ -27,6 +21,10 @@ class AirbnbApi
   def []=(uri, body, status=200)
     body = body.to_json
     self.responses[uri] = [ status, { "Content-length" => body.size }, [ body ] ]
+  end
+
+  def [](uri)
+    self.responses[uri]
   end
 
   private

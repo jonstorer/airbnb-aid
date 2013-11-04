@@ -1,0 +1,4 @@
+:default:
+  :url: redis://localhost:6379
+  :timeout: 120
+  :namespace: airbnb-aid

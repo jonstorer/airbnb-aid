@@ -8,7 +8,8 @@ class ListingWorker
   def perform(id)
     listing = Listing.find(id)
     begin
-      ListingUpdater.new(listing, Airbnb::Listing.find(listing.airbnb_id)).save!
+      airbnb_listing = Airbnb::Listing.find(listing.airbnb_id)
+      ListingUpdater.new(listing, airbnb_listing).save!
     rescue Airbnb::RecordNotFound => e
       listing.update_attributes!(:active => false)
     end

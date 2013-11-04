@@ -8,9 +8,8 @@ GIT
       origin (~> 1.0)
       tzinfo (~> 0.3.37)
 
-GIT
-  remote: git@github.com:jonstorer/airbnb.git
-  revision: 5ba741035d672924b614257e1d77163d79790568
+PATH
+  remote: ~/code/airbnb
   specs:
     airbnb (0.0.2)
       activesupport (>= 4.0.0)
@@ -272,6 +271,7 @@ DEPENDENCIES
   pry-nav
   pry-rails
   rails (>= 4.0.0)
+  redis
   rspec-mocks
   rspec-rails (>= 2.0)
   sass-rails (>= 4.0.0)

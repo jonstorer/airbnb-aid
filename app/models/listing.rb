@@ -59,6 +59,6 @@ class Listing
   end
 
   def watched_field_changed?
-    WATCHED_FIELDS.map{|field| __send__ "#{field}_changed?" }.include? true
+    WATCHED_FIELDS.any?{|field| __send__ "#{field}_changed?" }
   end
 end
