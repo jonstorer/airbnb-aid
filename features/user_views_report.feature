@@ -23,5 +23,3 @@ Feature: User authenticates
     And I follow "Listings"
     And I follow "1 Bedroom in Fort Greene"
     Then I should see "Reports"
-    When I follow "Latest"
-    Then I should see "2"

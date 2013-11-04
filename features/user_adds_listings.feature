@@ -15,8 +15,5 @@ Feature: User authenticates
     And I follow "Add Listing"
     And I fillin "Airbnb" with "12345"
     And I press "Add"
-    Then I should see "Listing 12345"
-    When jobs have run
-    And I follow "Listings"
     Then I should see "1 Bedroom in Fort Greene"
     And I should not see "Listing 12345"
