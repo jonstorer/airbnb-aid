@@ -272,6 +272,7 @@ DEPENDENCIES
   pry-nav
   pry-rails
   rails (>= 4.0.0)
+  redis
   rspec-mocks
   rspec-rails (>= 2.0)
   sass-rails (>= 4.0.0)
