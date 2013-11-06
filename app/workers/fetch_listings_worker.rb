@@ -1,7 +1,7 @@
 class FetchListingsWorker
   include Sidekiq::Worker
   sidekiq_options({
-    :throttle => { :threshold => 1, :period => 9.seconds },
+    :throttle => { :threshold => 1, :period => 8.seconds },
     :unique => true,
     :unique_unlock_order => :before_yield
   })
