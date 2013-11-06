@@ -16,6 +16,8 @@ gem 'sidekiq-throttler'
 gem 'sidekiq-unique-jobs'
 gem 'redis'
 
+gem 'redis'
+
 # use this when running on servers
 # https://github.com/ondrejbartas/sidekiq-cron
 
