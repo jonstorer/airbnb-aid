@@ -6,6 +6,9 @@ describe User do
   it { should have_field(:email) }
   it { should validate_presence_of(:email) }
 
+  it { should have_field(:remember_me_token) }
+  it { should validate_presence_of(:remember_me_token) }
+
   it { should validate_confirmation_of(:password) }
   it { should validate_presence_of(:password) }
 
@@ -63,5 +66,28 @@ describe User, '#password_matches?' do
 
   it 'returns false if the provided password does not match' do
     subject.password_matches?('known').should be_false
+  end
+end
+
+describe User, '#reset_remember_me_token!' do
+  subject { create(:user) }
+
+  it 'sets the member token when created' do
+    subject.remember_me_token.should_not be_nil
+  end
+
+  it 'resets the remember me token' do
+    before_token = subject.remember_me_token
+    subject.reset_remember_me_token!
+    after_token = subject.remember_me_token
+    before_token.should_not == after_token
+  end
+
+  it 'persists' do
+    before_token = subject.remember_me_token
+    subject.reset_remember_me_token!
+    subject.reload
+    after_token = subject.remember_me_token
+    before_token.should_not == after_token
   end
 end

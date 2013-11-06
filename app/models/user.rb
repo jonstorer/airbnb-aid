@@ -4,6 +4,7 @@ class User
 
   field :email
   field :salt
+  field :remember_me_token
   attr_accessor :password
   field :encrypted_password
 
@@ -12,8 +13,10 @@ class User
   validates :encrypted_password, :presence     => { :message => 'is required' }
   validates :email,              :presence     => { :message => 'is required' }
   validates :salt,               :presence     => true
+  validates :remember_me_token,  :presence     => true
 
   before_validation :set_encryped_password, :on => :create, :unless => 'password.blank?'
+  before_validation :set_remember_me_token, :on => :create
 
   has_and_belongs_to_many :listings, :inverse_of => nil
 
@@ -21,7 +24,16 @@ class User
     encrypted_password == encrypt(guess)
   end
 
+  def reset_remember_me_token!
+    set_remember_me_token
+    save!
+  end
+
   private
+
+  def set_remember_me_token
+    self.remember_me_token = encrypt("#{Time.now.to_i}--#{SecureRandom.hex}")
+  end
 
   def set_encryped_password
     self.encrypted_password = encrypt(password)
